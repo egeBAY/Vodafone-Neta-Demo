@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="app.css">
+    <script src="node_modules/socket.io/client-dist/socket.io.js"></script>
+    
+</head>
+<body>
+    <div class="container">
+<div id="listbox" class="header">
+
+<h2> TODO List for ME</h2>
+<input type="text" id="item" placeholder="Title ...">
+<span onclick="onAddClicked()" class="addBtn">Add</span>
+</div>
+<ul id="list">
+<li>Kitap oku</li>
+<li>Pazartesiye kadar projeyi tamamla!</li>
+<li>Almanca öğren</li>
+</ul>
+    <script type="text/javascript" src="app.js"> </script>
+    <script type="text/javascript"> 
+        function onAddClicked(){
+            var inputTxt = document.getElementById('item').value
+            var socket = io.connect('http://localhost:8080/');
+            socket.emit('new_data', { name: inputTxt })
+            newElement()
+        }
+
+        // function onCloseClicked() {
+        //         var inputTxt = document.getElementById('item').value
+        //         var socket = io.connect('http://localhost:8080/');
+        //         socket.emit('old_data', { name: inputTxt })
+        // }
+
+    </script>
+    </div>
+</body>
+</html>
