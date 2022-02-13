@@ -14,29 +14,12 @@ var close = document.getElementsByClassName('close')
 var i;
 console.log(close)
 
-// for(i=0; i<close.length; i++){
-
-//     close[i].addEventListener('click',function(ev){
-
-//         if(ev.target.tagName == 'LI'){
-//             var div = this.parentElement;
-//             div.style.display = 'none'
-        
-//             var inputTxt = document.getElementById('item').value
-//             var socket = io.connect('http://localhost:8080/');
-//             socket.emit('old_data', { name: inputTxt })
-//         }
-//     })
-
-//     // close[i].onclick = function(){
-//     //     var div = this.parentElement;
-//     //     div.style.display = 'none'
-        
-//     //     // var inputTxt = document.getElementById('item').value
-//     //     // var socket = io.connect('http://localhost:8080/');
-//     //     // socket.emit('old_data', { name: inputTxt })
-//     // }
-// }
+for(i=0; i<close.length; i++){
+    close[i].onclick = function(){
+        var div = this.parentElement;
+        div.style.display = 'none'
+    }
+}
 
 var list = document.querySelector('ul')
 list.addEventListener('click', function(ev){
@@ -61,18 +44,20 @@ function newElement(){
 
     var span =document.createElement('SPAN');
     span.className='close'
+    li.id = inputValue
     var txt = document.createTextNode('\u00D7')
     span.appendChild(txt)
     li.appendChild(span)
 
     for(i=0; i<close.length; i++){
-        close[i].onclick=function(){
+        close[i].onclick=function(i){
             var div = this.parentElement;
             div.style.display='none'
-
-            var oldTxt = document.getElementById(e.target.id).value
-            console.log(oldTxt)
+            
+            var oldTxt = document.getElementById(div.id).innerText 
+            oldTxt = oldTxt.slice(0,-1)
             var socket = io.connect('http://localhost:8080/');
+            console.log(oldTxt)
             socket.emit('old_data', { name: oldTxt })
             
         }
